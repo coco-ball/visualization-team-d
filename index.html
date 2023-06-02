@@ -18,37 +18,6 @@
       width: 100%;
     }
   </style>
-
-  <!-- <title></title>
-  <meta
-    name="viewport"
-    content="initial-scale=1,maximum-scale=1,user-scalable=no"
-  />
-  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js"></script>
-  <script src="https://d3js.org/d3.v4.min.js"></script>
-
-  <link
-    href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css"
-    rel="stylesheet"
-  />
-  <link
-    rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous"
-  />
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-    }
-    #map {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 100%;
-    }
-  </style> -->
 </head>
 <body>
   <div id="map"></div>
@@ -57,11 +26,95 @@
       "pk.eyJ1IjoiY29jby1iYWxsIiwiYSI6ImNsZ3V6MGdiYzJiYXczcXA5dXNib3FiNmgifQ.iIc1Mn4BuftkfQLkeUdVUw";
     const map = new mapboxgl.Map({
       container: "map", // container ID
-      style: "mapbox://styles/coco-ball/cli5gutby00vw01pzaakr2dtj", // style URL
-      center: [127.04, 37.51],
-      zoom: 14.1,
-      pitch: 80,
-      bearing: 20,
+      style: "mapbox://styles/mapbox/light-v11", // style URL
+      center: [126.93877, 37.5018],
+      zoom: 15,
+      pitch: 60,
+      bearing: 10,
+    });
+    map.addControl(new mapboxgl.NavigationControl());
+    map.on("load", function () {
+      map.addSource("dongjak-bvod11", {
+        type: "vector",
+        url: "mapbox://coco-ball.1x2lg3z8",
+      });
+      map.addSource("seoul-4f83ed", {
+        type: "vector",
+        url: "mapbox://coco-ball.98kzo2nk",
+      });
+      map.addLayer({
+        id: "dongjak",
+        type: "fill-extrusion",
+        source: "dongjak-bvod11",
+        "source-layer": "dongjakgeojsonl",
+        paint: {
+          "fill-extrusion-color": "#d9cece",
+          "fill-extrusion-height": 0,
+          "fill-extrusion-base": 10,
+          "fill-extrusion-opacity": 0.4,
+        },
+      });
+      map.addLayer({
+        id: "dongjak_waterfill",
+        type: "fill-extrusion",
+        source: "dongjak-bvod11",
+        "source-layer": "dongjakgeojsonl",
+        paint: {
+          "fill-extrusion-color": "#2dd4e6",
+          "fill-extrusion-height": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            16.5,
+            0,
+            18,
+            10,
+          ],
+          "fill-extrusion-base": 0,
+          "fill-extrusion-opacity": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            15,
+            0,
+            16.5,
+            0.6,
+          ],
+        },
+      });
+      map.addLayer({
+        id: "seoul",
+        type: "fill-extrusion",
+        source: "seoul-4f83ed",
+        "source-layer": "seoul-4f83ed",
+        paint: {
+          "fill-extrusion-color": "#99f5ff",
+          "fill-extrusion-height": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            16.5,
+            0,
+            18,
+            10,
+          ],
+          "fill-extrusion-base": 0,
+          "fill-extrusion-opacity": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            15,
+            0,
+            16.5,
+            0.6,
+          ],
+        },
+      });
+      map.addLayer({
+        id: "sky",
+        type: "sky",
+        paint: { "sky-atmosphere-color": "#eda6de" },
+      });
     });
   </script>
 </body>
