@@ -302,12 +302,16 @@
     // After the last frame rendered before the map enters an "idle" state.
     map.on("idle", () => {
       // If these two layers were not added to the map, abort
-      if (!map.getLayer("dongjak") || !map.getLayer("dongjak_waterfill")) {
+      if (
+        !map.getLayer("low") ||
+        !map.getLayer("medium") ||
+        !map.getLayer("high")
+      ) {
         return;
       }
 
       // Enumerate ids of the layers.
-      const toggleableLayerIds = ["dongjak", "dongjak_waterfill"];
+      const toggleableLayerIds = ["low", "medium", "high"];
 
       // Set up the corresponding toggle button for each layer.
       for (const id of toggleableLayerIds) {
