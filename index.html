@@ -22,6 +22,11 @@
       margin: 0;
       padding: 0;
     }
+
+    .flex {
+      display: flex;
+    }
+
     #map {
       position: absolute;
       top: 0;
@@ -48,13 +53,67 @@
   </style>
 </head>
 <body>
-  <div id="map"></div>
+  <style>
+    #menu {
+      background-color: white;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 2px;
+      border-radius: 3px;
+      width: 120px;
+
+      /* background: #fff;
+      position: absolute;
+      z-index: 1;
+      top: 10px;
+      right: 10px;
+      border-radius: 3px;
+      width: 120px;
+      border: 1px solid rgba(0, 0, 0, 0.4);
+      font-family: "Open Sans", sans-serif; */
+    }
+
+    #menu a {
+      font-size: 13px;
+      color: #404040;
+      display: block;
+      margin: 0;
+      padding: 0;
+      padding: 10px;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+      text-align: center;
+    }
+
+    #menu a:last-child {
+      border: none;
+    }
+
+    #menu a:hover {
+      background-color: #f8f8f8;
+      color: #404040;
+    }
+
+    #menu a.active {
+      background-color: #3887be;
+      color: #ffffff;
+    }
+
+    #menu a.active:hover {
+      background: #3074a4;
+    }
+  </style>
+  <div class="flex">
+    <div id="map"></div>
+  </div>
   <script>
     mapboxgl.accessToken =
       "pk.eyJ1IjoiY29jby1iYWxsIiwiYSI6ImNsZ3V6MGdiYzJiYXczcXA5dXNib3FiNmgifQ.iIc1Mn4BuftkfQLkeUdVUw";
     const map = new mapboxgl.Map({
       container: "map", // container ID
-      style: "mapbox://styles/mapbox/light-v11", // style URL
+      // style: "mapbox://styles/mapbox/light-v11", // style URL
+      style: "mapbox://styles/coco-ball/clihj73z9003q01r7277b7v2z", // style URL
       center: [126.93877, 37.5018],
       zoom: 14.5,
       pitch: 60,
@@ -70,82 +129,224 @@
         type: "vector",
         url: "mapbox://coco-ball.98kzo2nk",
       });
-      map.addLayer({
-        id: "dongjak",
-        type: "fill-extrusion",
-        source: "dongjak-bvod11",
-        "source-layer": "dongjakgeojsonl",
-        paint: {
-          "fill-extrusion-color": "#d9cece",
-          "fill-extrusion-height": 0,
-          "fill-extrusion-base": 10,
-          "fill-extrusion-opacity": 0.4,
-        },
+      //흔적도 예상도 점수
+      map.addSource("banjiha-2pz9wy", {
+        type: "vector",
+        url: "mapbox://coco-ball.dra6cwy5",
       });
+      //high - medium - low
+      map.addSource("final_score_low-7hu7qf", {
+        type: "vector",
+        url: "mapbox://coco-ball.7xctpkyf",
+      });
+      map.addSource("final_score_medium-2366ja", {
+        type: "vector",
+        url: "mapbox://coco-ball.dpwolidv",
+      });
+      map.addSource("final_score_high_6dllrv", {
+        type: "vector",
+        url: "mapbox://coco-ball.9bipxpgq",
+      });
+
+      // map.addLayer({
+      //   id: "trace",
+      //   type: "fill-extrusion",
+      //   source: "banjiha-2pz9wy",
+      //   "source-layer": "banjihageojsonl",
+      //   paint: {
+      //     "fill-extrusion-color": {
+      //       property: "FD_TRACE",
+      //       type: "exponential",
+      //       stops: [
+      //         [0, "#aaaaaa"],
+      //         [15, "#CC0000"],
+      //       ],
+      //     },
+      //     "fill-extrusion-height": 10,
+      //     "fill-extrusion-base": 0,
+      //     "fill-extrusion-opacity": 0.4,
+      //   },
+      // });
+      // map.addLayer({
+      //   id: "predict",
+      //   type: "fill-extrusion",
+      //   source: "banjiha-2pz9wy",
+      //   "source-layer": "banjihageojsonl",
+      //   paint: {
+      //     "fill-extrusion-color": {
+      //       property: "FD_PREDICT",
+      //       type: "exponential",
+      //       stops: [
+      //         [10, "#ff3300"],
+      //         [11, "#77aa00"],
+      //         [12, "#0022ff"],
+      //         [13, "#CC0000"],
+      //       ],
+      //     },
+      //     "fill-extrusion-height": 10,
+      //     "fill-extrusion-base": 0,
+      //     "fill-extrusion-opacity": 0.4,
+      //   },
+      // });
       map.addLayer({
-        id: "dongjak_waterfill",
+        id: "low",
         type: "fill-extrusion",
-        source: "dongjak-bvod11",
-        "source-layer": "dongjakgeojsonl",
+        source: "final_score_low-7hu7qf",
+        "source-layer": "final_score_lowgeojsonl",
         paint: {
-          "fill-extrusion-color": "#2dd4e6",
-          "fill-extrusion-height": [
-            "interpolate",
-            ["linear"],
-            ["zoom"],
-            16,
-            0,
-            17.5,
-            10,
-          ],
+          "fill-extrusion-color": "#ffc7c7",
+          "fill-extrusion-height": 10,
           "fill-extrusion-base": 0,
-          "fill-extrusion-opacity": [
-            "interpolate",
-            ["linear"],
-            ["zoom"],
-            14.5,
-            0,
-            16,
-            0.6,
-          ],
+          "fill-extrusion-opacity": 0.7,
         },
       });
       map.addLayer({
-        id: "seoul",
+        id: "medium",
         type: "fill-extrusion",
-        source: "seoul-4f83ed",
-        "source-layer": "seoul-4f83ed",
+        source: "final_score_medium-2366ja",
+        "source-layer": "final_score_mediumgeojsonl",
         paint: {
-          "fill-extrusion-color": "#99f5ff",
-          "fill-extrusion-height": [
-            "interpolate",
-            ["linear"],
-            ["zoom"],
-            16,
-            0,
-            17.5,
-            10,
-          ],
+          "fill-extrusion-color": "#ff5757",
+          "fill-extrusion-height": 10,
           "fill-extrusion-base": 0,
-          "fill-extrusion-opacity": [
-            "interpolate",
-            ["linear"],
-            ["zoom"],
-            14.5,
-            0,
-            16,
-            0.6,
-          ],
+          "fill-extrusion-opacity": 0.7,
         },
       });
+      map.addLayer({
+        id: "high",
+        type: "fill-extrusion",
+        source: "final_score_high_6dllrv",
+        "source-layer": "final_score_highgeojsonl",
+        paint: {
+          "fill-extrusion-color": "#750000",
+          "fill-extrusion-height": 10,
+          "fill-extrusion-base": 0,
+          "fill-extrusion-opacity": 0.7,
+        },
+      });
+      // map.addLayer({
+      //   id: "dongjak",
+      //   type: "fill-extrusion",
+      //   source: "dongjak-bvod11",
+      //   "source-layer": "dongjakgeojsonl",
+      //   paint: {
+      //     "fill-extrusion-color": "#d9cece",
+      //     "fill-extrusion-height": 0,
+      //     "fill-extrusion-base": 10,
+      //     "fill-extrusion-opacity": 0.4,
+      //   },
+      // });
+      // map.addLayer({
+      //   id: "dongjak_waterfill",
+      //   type: "fill-extrusion",
+      //   source: "dongjak-bvod11",
+      //   "source-layer": "dongjakgeojsonl",
+      //   paint: {
+      //     "fill-extrusion-color": "#2dd4e6",
+      //     "fill-extrusion-height": [
+      //       "interpolate",
+      //       ["linear"],
+      //       ["zoom"],
+      //       16,
+      //       0,
+      //       17.5,
+      //       10,
+      //     ],
+      //     "fill-extrusion-base": 0,
+      //     "fill-extrusion-opacity": [
+      //       "interpolate",
+      //       ["linear"],
+      //       ["zoom"],
+      //       14.5,
+      //       0,
+      //       16,
+      //       0.6,
+      //     ],
+      //   },
+      // });
+      // map.addLayer({
+      //   id: "seoul",
+      //   type: "fill-extrusion",
+      //   source: "seoul-4f83ed",
+      //   "source-layer": "seoul-4f83ed",
+      //   paint: {
+      //     "fill-extrusion-color": "#99f5ff",
+      //     "fill-extrusion-height": [
+      //       "interpolate",
+      //       ["linear"],
+      //       ["zoom"],
+      //       16,
+      //       0,
+      //       17.5,
+      //       10,
+      //     ],
+      //     "fill-extrusion-base": 0,
+      //     "fill-extrusion-opacity": [
+      //       "interpolate",
+      //       ["linear"],
+      //       ["zoom"],
+      //       14.5,
+      //       0,
+      //       16,
+      //       0.6,
+      //     ],
+      //   },
+      // });
       map.addLayer({
         id: "sky",
         type: "sky",
         paint: { "sky-atmosphere-color": "#eda6de" },
       });
     });
+
+    // After the last frame rendered before the map enters an "idle" state.
+    map.on("idle", () => {
+      // If these two layers were not added to the map, abort
+      if (!map.getLayer("dongjak") || !map.getLayer("dongjak_waterfill")) {
+        return;
+      }
+
+      // Enumerate ids of the layers.
+      const toggleableLayerIds = ["dongjak", "dongjak_waterfill"];
+
+      // Set up the corresponding toggle button for each layer.
+      for (const id of toggleableLayerIds) {
+        // Skip layers that already have a button set up.
+        if (document.getElementById(id)) {
+          continue;
+        }
+
+        // Create a link.
+        const link = document.createElement("a");
+        link.id = id;
+        link.href = "#";
+        link.textContent = id;
+        link.className = "active";
+
+        // Show or hide layer when the toggle is clicked.
+        link.onclick = function (e) {
+          const clickedLayer = this.textContent;
+          e.preventDefault();
+          e.stopPropagation();
+
+          const visibility = map.getLayoutProperty(clickedLayer, "visibility");
+
+          // Toggle layer visibility by changing the layout object's visibility property.
+          if (visibility === "visible") {
+            map.setLayoutProperty(clickedLayer, "visibility", "none");
+            this.className = "";
+          } else {
+            this.className = "active";
+            map.setLayoutProperty(clickedLayer, "visibility", "visible");
+          }
+        };
+
+        const layers = document.getElementById("menu");
+        layers.appendChild(link);
+      }
+    });
   </script>
-  <div class="legend" id="legend">
+  <!-- <div class="legend" id="legend">
     <div>
       <span class="legend-key" style="background-color: #800000"></span>
       <span>1950</span>
@@ -162,5 +363,6 @@
       <input id="침수예상도" , type="checkbox" name="침수흔적도" checked />
       <span>침수예상도</span>
     </label>
-  </div>
+  </div> -->
+  <nav id="menu"></nav>
 </body>
