@@ -18,6 +18,17 @@
       font-family: "Nanum Gothic", sans-serif;
       font-family: "Poppins", sans-serif;
     }
+
+    p {
+      font-family: "Nanum Gothic", sans-serif;
+      font-family: "Poppins", sans-serif;
+    }
+
+    a {
+      font-family: "Nanum Gothic", sans-serif;
+      font-family: "Poppins", sans-serif;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -33,45 +44,117 @@
       bottom: 0;
       width: 100%;
     }
-
-    .legend {
-      background-color: white;
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      padding: 2px;
-      border-radius: 2px;
-    }
-
-    .legend-key {
-      display: inline-block;
-      border-radius: 20%;
-      width: 10px;
-      height: 10px;
-      margin-right: 5px;
-    }
   </style>
 </head>
 <body>
   <style>
-    #menu {
+    #title {
       background-color: white;
       position: absolute;
       top: 20px;
       left: 20px;
+      display: flex;
+      flex-direction: column;
       padding: 2px;
+      padding-left: 10px;
+      padding-right: 10px;
       border-radius: 3px;
-      width: 120px;
+      font-size: x-large;
+      font-weight: bold;
+    }
 
-      /* background: #fff;
+    #info {
+      background-color: white;
       position: absolute;
-      z-index: 1;
-      top: 10px;
-      right: 10px;
+      top: 88px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      padding: 4px;
+      padding-left: 10px;
+      padding-right: 10px;
+      border-radius: 3px;
+    }
+
+    .text {
+      font-size: small;
+    }
+
+    #title p {
+      margin: 0;
+    }
+
+    #info p {
+      margin: 0;
+      font-size: small;
+      line-height: 130%;
+    }
+    .legend {
+      display: flex;
+      margin-top: 6px;
+      justify-items: center;
+      align-items: center;
+    }
+
+    #info div {
+      display: flex;
+      justify-items: center;
+      align-items: center;
+    }
+
+    .box1 {
+      width: 12px;
+      height: 12px;
+      margin-right: 6px;
+      background-color: #9293d8;
+    }
+    .box2 {
+      margin-left: 18px;
+      width: 12px;
+      height: 12px;
+      background-color: #f05151;
+      opacity: 0.2;
+    }
+    .box3 {
+      width: 12px;
+      height: 12px;
+      background-color: #f05151;
+      opacity: 0.4;
+    }
+    .box4 {
+      width: 12px;
+      height: 12px;
+      background-color: #f05151;
+      opacity: 0.6;
+    }
+    .box5 {
+      width: 12px;
+      height: 12px;
+      background-color: #f05151;
+      opacity: 0.7;
+    }
+    .box6 {
+      width: 12px;
+      height: 12px;
+      background-color: #f05151;
+      opacity: 0.8;
+    }
+    .box7 {
+      margin-right: 6px;
+      width: 12px;
+      height: 12px;
+      background-color: #f05151;
+      opacity: 1;
+    }
+
+    #menu {
+      background-color: white;
+      position: absolute;
+      top: 160px;
+      left: 20px;
+      padding: 4px;
       border-radius: 3px;
       width: 120px;
-      border: 1px solid rgba(0, 0, 0, 0.4);
-      font-family: "Open Sans", sans-serif; */
     }
 
     #menu a {
@@ -86,22 +169,29 @@
       text-align: center;
     }
 
-    #menu a:last-child {
-      border: none;
-    }
-
     #menu a:hover {
       background-color: #f8f8f8;
       color: #404040;
     }
 
     #menu a.active {
-      background-color: #3887be;
+      background-color: #ff5757;
       color: #ffffff;
     }
 
+    #menu a {
+      font-weight: bold;
+    }
+
+    #menu a:first-child.active {
+      background: #ffa8ac;
+    }
+    #menu a:last-child.active {
+      border: none;
+      background: #df2d2d;
+    }
     #menu a.active:hover {
-      background: #3074a4;
+      background: #a80c24;
     }
   </style>
   <div class="flex">
@@ -109,119 +199,75 @@
   </div>
   <script>
     mapboxgl.accessToken =
-      "pk.eyJ1IjoiY29jby1iYWxsIiwiYSI6ImNsZ3V6MGdiYzJiYXczcXA5dXNib3FiNmgifQ.iIc1Mn4BuftkfQLkeUdVUw";
+      "pk.eyJ1IjoieWVvbjgiLCJhIjoiY2xoMWNmZG44MTF6NzNxcnQ0aWZiZGd0MCJ9.Xs6eYwgvqxx7hOh00S5WfA";
     const map = new mapboxgl.Map({
       container: "map", // container ID
       // style: "mapbox://styles/mapbox/light-v11", // style URL
-      style: "mapbox://styles/coco-ball/clihj73z9003q01r7277b7v2z", // style URL
-      center: [126.93877, 37.5018],
-      zoom: 14.5,
-      pitch: 60,
-      bearing: 10,
+      style: "mapbox://styles/yeon8/cliohy76e006j01pwd1fqhuu6", // style URL
+      center: [126.953527, 37.480439],
+      zoom: 15.42,
+      pitch: 42,
+      bearing: 11.5,
     });
     map.addControl(new mapboxgl.NavigationControl());
     map.on("load", function () {
-      map.addSource("dongjak-bvod11", {
-        type: "vector",
-        url: "mapbox://coco-ball.1x2lg3z8",
-      });
       map.addSource("seoul-4f83ed", {
         type: "vector",
         url: "mapbox://coco-ball.98kzo2nk",
       });
-      //흔적도 예상도 점수
-      map.addSource("banjiha-2pz9wy", {
+      //전체반지하
+      map.addSource("banjiha-8nnvbu", {
         type: "vector",
-        url: "mapbox://coco-ball.dra6cwy5",
+        url: "mapbox://yeon8.bu4hkiit",
       });
       //high - medium - low
-      map.addSource("final_score_low-7hu7qf", {
+      map.addSource("final_score_low-5fm8hf", {
         type: "vector",
-        url: "mapbox://coco-ball.7xctpkyf",
+        url: "mapbox://yeon8.2wa4trja",
       });
-      map.addSource("final_score_medium-2366ja", {
+      map.addSource("final_score_medium-51lioh", {
         type: "vector",
-        url: "mapbox://coco-ball.dpwolidv",
+        url: "mapbox://yeon8.46y6lp49",
       });
-      map.addSource("final_score_high_6dllrv", {
+      map.addSource("final_score_high_81qqn3", {
         type: "vector",
-        url: "mapbox://coco-ball.9bipxpgq",
+        url: "mapbox://yeon8.5u1le5no",
       });
 
-      // map.addLayer({
-      //   id: "trace",
-      //   type: "fill-extrusion",
-      //   source: "banjiha-2pz9wy",
-      //   "source-layer": "banjihageojsonl",
-      //   paint: {
-      //     "fill-extrusion-color": {
-      //       property: "FD_TRACE",
-      //       type: "exponential",
-      //       stops: [
-      //         [0, "#aaaaaa"],
-      //         [15, "#CC0000"],
-      //       ],
-      //     },
-      //     "fill-extrusion-height": 10,
-      //     "fill-extrusion-base": 0,
-      //     "fill-extrusion-opacity": 0.4,
-      //   },
-      // });
-      // map.addLayer({
-      //   id: "predict",
-      //   type: "fill-extrusion",
-      //   source: "banjiha-2pz9wy",
-      //   "source-layer": "banjihageojsonl",
-      //   paint: {
-      //     "fill-extrusion-color": {
-      //       property: "FD_PREDICT",
-      //       type: "exponential",
-      //       stops: [
-      //         [10, "#ff3300"],
-      //         [11, "#77aa00"],
-      //         [12, "#0022ff"],
-      //         [13, "#CC0000"],
-      //       ],
-      //     },
-      //     "fill-extrusion-height": 10,
-      //     "fill-extrusion-base": 0,
-      //     "fill-extrusion-opacity": 0.4,
-      //   },
-      // });
       map.addLayer({
-        id: "low",
+        id: "주의",
         type: "fill-extrusion",
-        source: "final_score_low-7hu7qf",
-        "source-layer": "final_score_lowgeojsonl",
+        source: "final_score_low-5fm8hf",
+        "source-layer": "final_score_low",
         paint: {
-          "fill-extrusion-color": "#ffc7c7",
-          "fill-extrusion-height": 10,
+          "fill-extrusion-color": "#fdb4b8",
+          "fill-extrusion-height": 15,
           "fill-extrusion-base": 0,
-          "fill-extrusion-opacity": 0.7,
+          "fill-extrusion-opacity": 0.9,
         },
       });
       map.addLayer({
-        id: "medium",
+        id: "위험",
         type: "fill-extrusion",
-        source: "final_score_medium-2366ja",
-        "source-layer": "final_score_mediumgeojsonl",
+        source: "final_score_medium-51lioh",
+        "source-layer": "final_score_medium",
         paint: {
-          "fill-extrusion-color": "#ff5757",
-          "fill-extrusion-height": 10,
+          "fill-extrusion-color": "#fd7785",
+          "fill-extrusion-height": 15,
           "fill-extrusion-base": 0,
-          "fill-extrusion-opacity": 0.7,
+          "fill-extrusion-opacity": 0.9,
         },
       });
       map.addLayer({
-        id: "high",
+        id: "고위험",
         type: "fill-extrusion",
-        source: "final_score_high_6dllrv",
-        "source-layer": "final_score_highgeojsonl",
+        source: "final_score_high_81qqn3",
+        "source-layer": "final_score_high",
         paint: {
-          "fill-extrusion-color": "#750000",
-          "fill-extrusion-height": 10,
+          "fill-extrusion-color": "#9f0f24",
+          "fill-extrusion-height": 15,
           "fill-extrusion-base": 0,
-          "fill-extrusion-opacity": 0.7,
+          "fill-extrusion-opacity": 0.9,
         },
       });
       // map.addLayer({
@@ -303,20 +349,21 @@
     map.on("idle", () => {
       // If these two layers were not added to the map, abort
       if (
-        !map.getLayer("low") ||
-        !map.getLayer("medium") ||
-        !map.getLayer("high")
+        !map.getLayer("주의") ||
+        !map.getLayer("위험") ||
+        !map.getLayer("고위험")
       ) {
         return;
       }
 
       // Enumerate ids of the layers.
-      const toggleableLayerIds = ["low", "medium", "high"];
+      const toggleableLayerIds = ["주의", "위험", "고위험"];
 
       // Set up the corresponding toggle button for each layer.
       for (const id of toggleableLayerIds) {
         // Skip layers that already have a button set up.
         if (document.getElementById(id)) {
+          console.log(document.getElementById(id));
           continue;
         }
 
@@ -368,5 +415,34 @@
       <span>침수예상도</span>
     </label>
   </div> -->
+  <div id="title">
+    <p>서울시 5개구 반지하 침수위험지도</p>
+    <p class="text">비주얼라이제이션 D조</p>
+  </div>
+  <div id="info">
+    <p>
+      관악구, 동작구, 영등포구, 서초구, 강남구 반지하의 침수 위험 정도를
+      '침수예상지역, 침수이력,
+    </p>
+    <p>
+      건물 노후화 정도, 지역 강우량' 네 가지 기준을 바탕으로 매긴
+      침수위험지도입니다.
+    </p>
+    <div class="legend">
+      <div>
+        <div class="box1"></div>
+        <p>침수흔적도</p>
+      </div>
+      <div>
+        <div class="box2"></div>
+        <div class="box3"></div>
+        <div class="box4"></div>
+        <div class="box5"></div>
+        <div class="box6"></div>
+        <div class="box7"></div>
+        <p>침수예상도</p>
+      </div>
+    </div>
+  </div>
   <nav id="menu"></nav>
 </body>
