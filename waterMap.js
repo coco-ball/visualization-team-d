@@ -11,9 +11,15 @@ function waterMap(element) {
     bearing: 11.5,
   });
 
+  var mapCanvas = document.getElementsByClassName("mapboxgl-canvas")[0];
+  console.log(mapCanvas);
+  // mapCanvas.width = "100vw";
+  // mapCanvas.height = "100vh";
+
   mapp.addControl(new mapboxgl.NavigationControl());
 
   mapp.on("load", function () {
+    mapp.resize();
     mapp.addSource("seoul-6a11ya", {
       type: "vector",
       url: "mapbox://yeon8.4jffyadw",

@@ -22,11 +22,11 @@ body {
   display: flex;
 }
 
-canvas {
+#mapp div canvas {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
+  top: 200px;
+  left: 500px;
+  width: 1920px;
   z-index: 0;
 }
 
@@ -42,7 +42,9 @@ canvas {
   position: absolute;
   top: 0;
   bottom: 0;
+  height: 100vh;
   width: 100%;
+
   z-index: 0;
 }
 
