@@ -1,448 +1,109 @@
 <!DOCTYPE html>
-<head>
-  <meta charset="utf-8" />
-  <title>비라제 D조 - 반지하 지도</title>
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
-  <link
-    href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css"
-    rel="stylesheet"
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Poppins:wght@100;200;300;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-  <style>
-    span {
-      font-family: "Nanum Gothic", sans-serif;
-      font-family: "Poppins", sans-serif;
-    }
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>비라제 D조 - 반지하 지도</title>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Poppins:wght@100;200;300;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./mapStyle.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <script src="./levelMap.js"></script>
+    <script src="./waterMap.js"></script>
 
-    p {
-      font-family: "Nanum Gothic", sans-serif;
-      font-family: "Poppins", sans-serif;
-    }
+      <ul class="tabs">
+        <li class="tab-link current" data-tab="tab-1">
+          <img
+            id="tab1"
+            class="icon"
+            src="./waterdrop.png"
+            alt="비 내리기"
+            onclick="levelMap(this)"
+          />
+        </li>
+        <li class="tab-link" data-tab="tab-2">
+          <img
+            class="icon"
+            src="./building.png"
+            alt="침수위험지도"
+            onclick="waterMap(this)"
+          />
+        </li>
+        <li class="tab-link" data-tab="tab-3">
+          <img class="icon" src="./info2.png" alt="침수위험지도" />
+        </li>
+      </ul>
 
-    a {
-      font-family: "Nanum Gothic", sans-serif;
-      font-family: "Poppins", sans-serif;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-    }
-
-    .flex {
-      display: flex;
-    }
-
-    #map {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 100%;
-    }
-  </style>
-</head>
-<body>
-  <style>
-    #title {
-      background-color: white;
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      display: flex;
-      flex-direction: column;
-      padding: 2px;
-      padding-left: 10px;
-      padding-right: 10px;
-      border-radius: 3px;
-      font-size: x-large;
-      font-weight: bold;
-    }
-
-    #info {
-      background-color: white;
-      position: absolute;
-      top: 88px;
-      left: 20px;
-      display: flex;
-      flex-direction: column;
-      padding: 4px;
-      padding-left: 10px;
-      padding-right: 10px;
-      border-radius: 3px;
-    }
-
-    .text {
-      font-size: small;
-    }
-
-    #title p {
-      margin: 0;
-    }
-
-    #info p {
-      margin: 0;
-      font-size: small;
-      line-height: 130%;
-    }
-    .legend {
-      display: flex;
-      margin-top: 6px;
-      justify-items: center;
-      align-items: center;
-    }
-
-    #info div {
-      display: flex;
-      justify-items: center;
-      align-items: center;
-    }
-
-    .box1 {
-      width: 12px;
-      height: 12px;
-      margin-right: 6px;
-      background-color: #9293d8;
-    }
-    .box2 {
-      margin-left: 18px;
-      width: 12px;
-      height: 12px;
-      background-color: #f05151;
-      opacity: 0.2;
-    }
-    .box3 {
-      width: 12px;
-      height: 12px;
-      background-color: #f05151;
-      opacity: 0.4;
-    }
-    .box4 {
-      width: 12px;
-      height: 12px;
-      background-color: #f05151;
-      opacity: 0.6;
-    }
-    .box5 {
-      width: 12px;
-      height: 12px;
-      background-color: #f05151;
-      opacity: 0.7;
-    }
-    .box6 {
-      width: 12px;
-      height: 12px;
-      background-color: #f05151;
-      opacity: 0.8;
-    }
-    .box7 {
-      margin-right: 6px;
-      width: 12px;
-      height: 12px;
-      background-color: #f05151;
-      opacity: 1;
-    }
-
-    #menu {
-      background-color: white;
-      position: absolute;
-      top: 160px;
-      left: 20px;
-      padding: 4px;
-      border-radius: 3px;
-      width: 120px;
-    }
-
-    #menu a {
-      font-size: 13px;
-      color: #404040;
-      display: block;
-      margin: 0;
-      padding: 0;
-      padding: 10px;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-      text-align: center;
-    }
-
-    #menu a:hover {
-      background-color: #f8f8f8;
-      color: #404040;
-    }
-
-    #menu a.active {
-      background-color: #ff5757;
-      color: #ffffff;
-    }
-
-    #menu a {
-      font-weight: bold;
-    }
-
-    #menu a:first-child.active {
-      background: #ffa8ac;
-    }
-    #menu a:last-child.active {
-      border: none;
-      background: #df2d2d;
-    }
-    #menu a.active:hover {
-      background: #a80c24;
-    }
-  </style>
-  <div class="flex">
-    <div id="map"></div>
-  </div>
-  <script>
-    mapboxgl.accessToken =
-      "pk.eyJ1IjoieWVvbjgiLCJhIjoiY2xoMWNmZG44MTF6NzNxcnQ0aWZiZGd0MCJ9.Xs6eYwgvqxx7hOh00S5WfA";
-    const map = new mapboxgl.Map({
-      container: "map", // container ID
-      // style: "mapbox://styles/mapbox/light-v11", // style URL
-      style: "mapbox://styles/yeon8/cliohy76e006j01pwd1fqhuu6", // style URL
-      center: [126.953527, 37.480439],
-      zoom: 15.42,
-      pitch: 42,
-      bearing: 11.5,
-    });
-    map.addControl(new mapboxgl.NavigationControl());
-    map.on("load", function () {
-      map.addSource("seoul-4f83ed", {
-        type: "vector",
-        url: "mapbox://coco-ball.98kzo2nk",
-      });
-      //전체반지하
-      map.addSource("banjiha-8nnvbu", {
-        type: "vector",
-        url: "mapbox://yeon8.bu4hkiit",
-      });
-      //high - medium - low
-      map.addSource("final_score_low-5fm8hf", {
-        type: "vector",
-        url: "mapbox://yeon8.2wa4trja",
-      });
-      map.addSource("final_score_medium-51lioh", {
-        type: "vector",
-        url: "mapbox://yeon8.46y6lp49",
-      });
-      map.addSource("final_score_high_81qqn3", {
-        type: "vector",
-        url: "mapbox://yeon8.5u1le5no",
-      });
-
-      map.addLayer({
-        id: "주의",
-        type: "fill-extrusion",
-        source: "final_score_low-5fm8hf",
-        "source-layer": "final_score_low",
-        paint: {
-          "fill-extrusion-color": "#fdb4b8",
-          "fill-extrusion-height": 15,
-          "fill-extrusion-base": 0,
-          "fill-extrusion-opacity": 0.9,
-        },
-      });
-      map.addLayer({
-        id: "위험",
-        type: "fill-extrusion",
-        source: "final_score_medium-51lioh",
-        "source-layer": "final_score_medium",
-        paint: {
-          "fill-extrusion-color": "#fd7785",
-          "fill-extrusion-height": 15,
-          "fill-extrusion-base": 0,
-          "fill-extrusion-opacity": 0.9,
-        },
-      });
-      map.addLayer({
-        id: "고위험",
-        type: "fill-extrusion",
-        source: "final_score_high_81qqn3",
-        "source-layer": "final_score_high",
-        paint: {
-          "fill-extrusion-color": "#9f0f24",
-          "fill-extrusion-height": 15,
-          "fill-extrusion-base": 0,
-          "fill-extrusion-opacity": 0.9,
-        },
-      });
-      // map.addLayer({
-      //   id: "dongjak",
-      //   type: "fill-extrusion",
-      //   source: "dongjak-bvod11",
-      //   "source-layer": "dongjakgeojsonl",
-      //   paint: {
-      //     "fill-extrusion-color": "#d9cece",
-      //     "fill-extrusion-height": 0,
-      //     "fill-extrusion-base": 10,
-      //     "fill-extrusion-opacity": 0.4,
-      //   },
-      // });
-      // map.addLayer({
-      //   id: "dongjak_waterfill",
-      //   type: "fill-extrusion",
-      //   source: "dongjak-bvod11",
-      //   "source-layer": "dongjakgeojsonl",
-      //   paint: {
-      //     "fill-extrusion-color": "#2dd4e6",
-      //     "fill-extrusion-height": [
-      //       "interpolate",
-      //       ["linear"],
-      //       ["zoom"],
-      //       16,
-      //       0,
-      //       17.5,
-      //       10,
-      //     ],
-      //     "fill-extrusion-base": 0,
-      //     "fill-extrusion-opacity": [
-      //       "interpolate",
-      //       ["linear"],
-      //       ["zoom"],
-      //       14.5,
-      //       0,
-      //       16,
-      //       0.6,
-      //     ],
-      //   },
-      // });
-      // map.addLayer({
-      //   id: "seoul",
-      //   type: "fill-extrusion",
-      //   source: "seoul-4f83ed",
-      //   "source-layer": "seoul-4f83ed",
-      //   paint: {
-      //     "fill-extrusion-color": "#99f5ff",
-      //     "fill-extrusion-height": [
-      //       "interpolate",
-      //       ["linear"],
-      //       ["zoom"],
-      //       16,
-      //       0,
-      //       17.5,
-      //       10,
-      //     ],
-      //     "fill-extrusion-base": 0,
-      //     "fill-extrusion-opacity": [
-      //       "interpolate",
-      //       ["linear"],
-      //       ["zoom"],
-      //       14.5,
-      //       0,
-      //       16,
-      //       0.6,
-      //     ],
-      //   },
-      // });
-      map.addLayer({
-        id: "sky",
-        type: "sky",
-        paint: { "sky-atmosphere-color": "#eda6de" },
-      });
-    });
-
-    // After the last frame rendered before the map enters an "idle" state.
-    map.on("idle", () => {
-      // If these two layers were not added to the map, abort
-      if (
-        !map.getLayer("주의") ||
-        !map.getLayer("위험") ||
-        !map.getLayer("고위험")
-      ) {
-        return;
-      }
-
-      // Enumerate ids of the layers.
-      const toggleableLayerIds = ["주의", "위험", "고위험"];
-
-      // Set up the corresponding toggle button for each layer.
-      for (const id of toggleableLayerIds) {
-        // Skip layers that already have a button set up.
-        if (document.getElementById(id)) {
-          console.log(document.getElementById(id));
-          continue;
-        }
-
-        // Create a link.
-        const link = document.createElement("a");
-        link.id = id;
-        link.href = "#";
-        link.textContent = id;
-        link.className = "active";
-
-        // Show or hide layer when the toggle is clicked.
-        link.onclick = function (e) {
-          const clickedLayer = this.textContent;
-          e.preventDefault();
-          e.stopPropagation();
-
-          const visibility = map.getLayoutProperty(clickedLayer, "visibility");
-
-          // Toggle layer visibility by changing the layout object's visibility property.
-          if (visibility === "visible") {
-            map.setLayoutProperty(clickedLayer, "visibility", "none");
-            this.className = "";
-          } else {
-            this.className = "active";
-            map.setLayoutProperty(clickedLayer, "visibility", "visible");
-          }
-        };
-
-        const layers = document.getElementById("menu");
-        layers.appendChild(link);
-      }
-    });
-  </script>
-  <!-- <div class="legend" id="legend">
-    <div>
-      <span class="legend-key" style="background-color: #800000"></span>
-      <span>1950</span>
-    </div>
-    <div>
-      <span class="legend-key" style="background-color: #cc0000"></span>
-      <span>1960</span>
-    </div>
-    <label for="침수흔적도">
-      <input id="침수흔적도" , type="checkbox" name="침수흔적도" checked />
-      <span>침수흔적도</span>
-    </label>
-    <label for="침수예상도">
-      <input id="침수예상도" , type="checkbox" name="침수흔적도" checked />
-      <span>침수예상도</span>
-    </label>
-  </div> -->
-  <div id="title">
-    <p>서울시 5개구 반지하 침수위험지도</p>
-    <p class="text">비주얼라이제이션 D조</p>
-  </div>
-  <div id="info">
-    <p>
-      관악구, 동작구, 영등포구, 서초구, 강남구 반지하의 침수 위험 정도를
-      '침수예상지역, 침수이력,
-    </p>
-    <p>
-      건물 노후화 정도, 지역 강우량' 네 가지 기준을 바탕으로 매긴
-      침수위험지도입니다.
-    </p>
-    <div class="legend">
-      <div>
-        <div class="box1"></div>
-        <p>침수흔적도</p>
+      <div id="tab-1" class="tab-content current">
+        <script>
+          levelMap(this)
+        </script>
+        <div class="flex">
+          <div id="map"></div>
+        </div>
+        <nav id="menu"></nav>
       </div>
-      <div>
-        <div class="box2"></div>
-        <div class="box3"></div>
-        <div class="box4"></div>
-        <div class="box5"></div>
-        <div class="box6"></div>
-        <div class="box7"></div>
-        <p>침수예상도</p>
+      <div id="tab-2" class="tab-content">
+        <div class="flex">
+          <div id="mapp"></div>
+        </div>
+      </div>
+      <div id="tab-3" class="tab-content">
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+        ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur.
       </div>
     </div>
-  </div>
-  <nav id="menu"></nav>
-</body>
+    <!-- container -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script src="./script.js"></script>
+    <div class="introduction">
+      <div id="title">
+        <p>서울시 5개구 반지하 침수위험지도</p>
+        <p class="text">비주얼라이제이션 D조</p>
+      </div>
+      <div id="info">
+        <p>
+          관악구, 동작구, 영등포구, 서초구, 강남구 반지하의 침수 위험 정도를
+          '침수예상지역, 침수이력,
+        </p>
+        <p>
+          건물 노후화 정도, 지역 강우량' 네 가지 기준을 바탕으로 매긴
+          침수위험지도입니다.
+        </p>
+        <div class="legend">
+          <div>
+            <div class="box1"></div>
+            <p>침수흔적도</p>
+          </div>
+          <div>
+            <div class="box2"></div>
+            <div class="box3"></div>
+            <div class="box4"></div>
+            <div class="box5"></div>
+            <div class="box6"></div>
+            <div class="box7"></div>
+            <p>침수예상도</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
