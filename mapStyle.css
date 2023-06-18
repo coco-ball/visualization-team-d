@@ -97,6 +97,7 @@ body {
   margin-top: 6px;
   justify-items: center;
   align-items: center;
+  gap: 25px;
 }
 
 #info div {
@@ -148,6 +149,69 @@ body {
   height: 12px;
   background-color: #f05151;
   opacity: 1;
+}
+.box8 {
+  margin-right: 6px;
+  width: 12px;
+  height: 12px;
+  background-color: #8af0fb;
+  opacity: 1;
+}
+.box9 {
+  margin-right: 6px;
+  width: 12px;
+  height: 12px;
+  background-color: #2dd4e6;
+  opacity: 1;
+}
+.box10 {
+  margin-right: 6px;
+  width: 12px;
+  height: 12px;
+  background-color: #008e9d;
+  opacity: 1;
+}
+
+.index2 {
+  background-color: white;
+  position: absolute;
+  top: 160px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 3px;
+  box-shadow: 0px 3px 5px #6d6d6d74;
+  margin: 0;
+}
+
+.legend2 {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.legend2 div {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+.legend2 div p {
+  margin: 0;
+  font-size: small;
+  line-height: 130%;
+}
+
+.zoom {
+  margin: 0;
+  font-size: small;
+  line-height: 130%;
+  margin-top: 4px;
+  font-weight: bold;
 }
 
 #menu {

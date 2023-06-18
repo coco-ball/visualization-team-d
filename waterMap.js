@@ -19,10 +19,10 @@ function waterMap(element) {
   // var mapDiv = document.getElementById("mapp");
   // if (mapDiv.style.visibility === true) mapp.resize();
 
-  var mapCanvas = document.getElementsByClassName("mapboxgl-canvas")[1];
-  console.log(mapCanvas);
-  mapCanvas.style.width = "100vw";
-  mapCanvas.style.height = "100vh";
+  // var mapCanvas = document.getElementsByClassName("mapboxgl-canvas")[1];
+  // console.log(mapCanvas);
+  // mapCanvas.style.width = "100vw";
+  // mapCanvas.style.height = "100vh";
   // mapCanvas.width = "100vw";
   // mapCanvas.height = "100vh";
   // mapCanvas.style.width = mapCanvas1.style.width;

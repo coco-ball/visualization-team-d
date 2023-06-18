@@ -29,11 +29,21 @@
           />
         </li>
         <li class="tab-link" data-tab="tab-2">
-          <img
-            class="icon"
-            src="./waterdrop.png"
-            alt="침수위험지도"
-          />
+          <script type="text/javascript">
+            const water = 'index2.html';
+            
+            function hrefWater() {
+              location.href = water;
+            }
+            
+            </script>
+          <button
+            class="btn"
+            onclick="hrefWater()"
+          >
+            <img class="icon"
+                 src="./waterdrop.png"
+                  alt="침수위험지도" /></button>
         </li>
         <div class="dropdown">
           <img class="icon" src="./info2.png" alt="지도 설명" />
@@ -51,24 +61,14 @@
         <script src="./levelMap.js"></script>
         <script>levelMap(this)</script>
       </div>
-      <div id="tab-2" class="tab-content">
-        <div class="flex">
-          <div id="mapp"></div>
-        </div>
-        <script src="./waterMap.js"></script>
-        <script>waterMap(this)</script>
-      </div>
-      <div id="tab-3" class="tab-content">
-      </div>
     </div>
-    <!-- container -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
 
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
     <script src="./script.js"></script>
     <div class="introduction">
       <div id="title">
