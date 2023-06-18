@@ -11,10 +11,24 @@ function waterMap(element) {
     bearing: 11.5,
   });
 
-  var mapCanvas = document.getElementsByClassName("mapboxgl-canvas")[0];
+  // mapp.on("resize", function () {
+  //   console.log("A resize event occurred.");
+  // });
+
+  // mapp.resize();
+  // var mapDiv = document.getElementById("mapp");
+  // if (mapDiv.style.visibility === true) mapp.resize();
+
+  var mapCanvas = document.getElementsByClassName("mapboxgl-canvas")[1];
   console.log(mapCanvas);
+  mapCanvas.style.width = "100vw";
+  mapCanvas.style.height = "100vh";
   // mapCanvas.width = "100vw";
   // mapCanvas.height = "100vh";
+  // mapCanvas.style.width = mapCanvas1.style.width;
+  // mapCanvas.style.height = mapCanvas1.style.height;
+  // mapCanvas.width = mapCanvas1.width;
+  // mapCanvas.height = mapCanvas1.height;
 
   mapp.addControl(new mapboxgl.NavigationControl());
 

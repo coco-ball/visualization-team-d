@@ -22,14 +22,6 @@ body {
   display: flex;
 }
 
-#mapp div canvas {
-  position: absolute;
-  top: 200px;
-  left: 500px;
-  width: 1920px;
-  z-index: 0;
-}
-
 #map {
   position: absolute;
   top: 0;
@@ -41,11 +33,16 @@ body {
 #mapp {
   position: absolute;
   top: 0;
-  bottom: 0;
-  height: 100vh;
+  left: 0;
+  height: 100%;
   width: 100%;
 
   z-index: 0;
+}
+
+#map-container {
+  height: 100vh;
+  width: auto;
 }
 
 .introduction {
