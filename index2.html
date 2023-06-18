@@ -18,57 +18,46 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <ul class="tabs">
+      <li class="tab-link" data-tab="tab-1">
+        <script type="text/javascript">
+          const level = "index.html";
 
-      <ul class="tabs">
-        <li class="tab-link current" data-tab="tab-1">
-          <img
-            id="tab1"
-            class="icon"
-            src="./building.png"
-            alt="비 내리기"
-          />
-        </li>
-        <li class="tab-link" data-tab="tab-2">
-          <img
-            class="icon"
-            src="./waterdrop.png"
-            alt="침수위험지도"
-          />
-        </li>
-        <div class="dropdown">
-          <img class="icon" src="./info2.png" alt="지도 설명" />
-          <div class="dropdown-content">
-            <img class="infoimg" src="./description.png" alt=""/>
-          </div>
+          function hrefLevel() {
+            location.href = level;
+          }
+        </script>
+        <button class="btn" onclick="hrefLevel()">
+          <img id="tab1" class="icon" src="./building.png" alt="비 내리기" />
+        </button>
+      </li>
+      <li class="tab-link current" data-tab="tab-2">
+        <img class="icon" src="./waterdrop.png" alt="침수위험지도" />
+      </li>
+      <div class="dropdown">
+        <img class="icon" src="./info2.png" alt="지도 설명" />
+        <div class="dropdown-content">
+          <img class="infoimg" src="./description.png" alt="" />
         </div>
-      </ul>
-      
-      <div id="tab-1" class="tab-content current" >
-        <div class="flex">
-          <div id="map"></div>
-        </div>
-        <nav id="menu"></nav>
-        <script src="./levelMap.js"></script>
-        <script>levelMap(this)</script>
       </div>
-      <div id="tab-2" class="tab-content">
-        <div class="flex">
-          <div id="mapp"></div>
-        </div>
-        <script src="./waterMap.js"></script>
-        <script>waterMap(this)</script>
+    </ul>
+
+    <div id="tab-2" class="tab-content">
+      <div class="flex">
+        <div id="mapp"></div>
       </div>
-      <div id="tab-3" class="tab-content">
-      </div>
+      <script src="./waterMap.js"></script>
+      <script>
+        waterMap(this);
+      </script>
     </div>
-    <!-- container -->
+
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
       integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-
     <script src="./script.js"></script>
     <div class="introduction">
       <div id="title">
@@ -98,8 +87,25 @@
             <div class="box7"></div>
             <p>침수예상도</p>
           </div>
+      </div>
+    </div>
+    <div class="index2">
+      <div class="legend2">
+        <div>
+          <div class="box8"></div>
+          <p>주의</p>
+        </div>
+        <div>
+          <div class="box9"></div>
+          <p>위험</p>
+        </div>
+        <div>
+          <div class="box10"></div>
+          <p>고위험</p>
         </div>
       </div>
+          <p class="zoom">원하는 장소로 zoom-in 해보세요.</p>
+
     </div>
   </body>
 </html>

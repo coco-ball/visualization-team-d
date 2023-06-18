@@ -11,10 +11,10 @@ function levelMap(element) {
     bearing: 11.5,
   });
 
-  var mapCanvas = document.getElementsByClassName("mapboxgl-canvas")[0];
-  console.log(mapCanvas);
-  mapCanvas.style.width = "100vw";
-  mapCanvas.style.height = "100vh";
+  // var mapCanvas = document.getElementsByClassName("mapboxgl-canvas")[0];
+  // console.log(mapCanvas);
+  // mapCanvas.style.width = "100vw";
+  // mapCanvas.style.height = "100vh";
 
   map.on("load", function () {
     map.addSource("seoul-4f83ed", {
