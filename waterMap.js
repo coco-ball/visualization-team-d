@@ -67,10 +67,10 @@ function waterMap(element) {
       source: "final_score_low-5fm8hf",
       "source-layer": "final_score_low",
       paint: {
-        "fill-extrusion-color": "#d9cece",
+        "fill-extrusion-color": "#EDE0E0",
         "fill-extrusion-height": 0,
         "fill-extrusion-base": 15,
-        "fill-extrusion-opacity": 0.4,
+        "fill-extrusion-opacity": 0.6,
       },
     });
     mapp.addLayer({
@@ -79,10 +79,10 @@ function waterMap(element) {
       source: "final_score_medium-51lioh",
       "source-layer": "final_score_medium",
       paint: {
-        "fill-extrusion-color": "#d9cece",
+        "fill-extrusion-color": "#EDE0E0",
         "fill-extrusion-height": 0,
         "fill-extrusion-base": 15,
-        "fill-extrusion-opacity": 0.4,
+        "fill-extrusion-opacity": 0.6,
       },
     });
     mapp.addLayer({
@@ -91,40 +91,12 @@ function waterMap(element) {
       source: "final_score_high_81qqn3",
       "source-layer": "final_score_high",
       paint: {
-        "fill-extrusion-color": "#d9cece",
+        "fill-extrusion-color": "#EDE0E0",
         "fill-extrusion-height": 0,
-        "fill-extrusion-base": 5,
-        "fill-extrusion-opacity": 0.4,
+        "fill-extrusion-base": 15,
+        "fill-extrusion-opacity": 0.6,
       },
     });
-
-    //   id: "dongjak_waterfill",
-    //   type: "fill-extrusion",
-    //   source: "dongjak-bvod11",
-    //   "source-layer": "dongjakgeojsonl",
-    //   paint: {
-    //     "fill-extrusion-color": "#2dd4e6",
-    //     "fill-extrusion-height": [
-    //       "interpolate",
-    //       ["linear"],
-    //       ["zoom"],
-    //       16,
-    //       0,
-    //       17.5,
-    //       10,
-    //     ],
-    //     "fill-extrusion-base": 0,
-    //     "fill-extrusion-opacity": [
-    //       "interpolate",
-    //       ["linear"],
-    //       ["zoom"],
-    //       14.5,
-    //       0,
-    //       16,
-    //       0.6,
-    //     ],
-    //   },
-    // });
 
     mapp.addLayer({
       id: "주의-water",
@@ -150,7 +122,7 @@ function waterMap(element) {
           14.5,
           0,
           16,
-          0.6,
+          0.8,
         ],
       },
     });
@@ -178,7 +150,7 @@ function waterMap(element) {
           14.5,
           0,
           16,
-          0.6,
+          0.8,
         ],
       },
     });
@@ -206,7 +178,7 @@ function waterMap(element) {
           14.5,
           0,
           16,
-          0.6,
+          0.8,
         ],
       },
     });
@@ -224,8 +196,8 @@ function waterMap(element) {
           ["zoom"],
           16,
           0,
-          17.5,
-          15,
+          19,
+          30,
         ],
         "fill-extrusion-base": 0,
         "fill-extrusion-opacity": [
