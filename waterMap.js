@@ -132,7 +132,7 @@ function waterMap(element) {
       source: "final_score_medium-51lioh",
       "source-layer": "final_score_medium",
       paint: {
-        "fill-extrusion-color": "#2dd4e6",
+        "fill-extrusion-color": "#00C2E3",
         "fill-extrusion-height": [
           "interpolate",
           ["linear"],
@@ -160,7 +160,7 @@ function waterMap(element) {
       source: "final_score_high_81qqn3",
       "source-layer": "final_score_high",
       paint: {
-        "fill-extrusion-color": "#008E9D",
+        "fill-extrusion-color": "#00869F",
         "fill-extrusion-height": [
           "interpolate",
           ["linear"],
