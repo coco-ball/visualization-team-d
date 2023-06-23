@@ -4,7 +4,7 @@ function waterMap(element) {
   const mapp = new mapboxgl.Map({
     container: "mapp", // container ID
     // style: "mapbox://styles/mapbox/light-v11", // style URL
-    style: "mapbox://styles/yeon8/clj8ss4qx002p01rchqf3fc6w", // style URL
+    style: "mapbox://styles/yeon8/cliohy76e006j01pwd1fqhuu6", // style URL
     center: [126.953527, 37.480439],
     zoom: 15.42,
     pitch: 42,
